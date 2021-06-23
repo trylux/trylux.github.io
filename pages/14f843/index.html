@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>CentOS8编译配置nginx和rtmp | Try&#39;s Note</title>
+    <meta name="generator" content="VuePress 1.8.0">
+    <link rel="icon" href="/img/favicon.ico">
+    <script data-ad-client="ca-pub-7828333725993554" async="async" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <meta name="description" content="notebook">
+    <meta name="keywords" content="技术总结、积累">
+    <meta name="baidu-site-verification" content="7F55weZDDc">
+    <meta name="theme-color" content="#11a8cd">
+    <link rel="preload" href="/assets/css/0.styles.c845bb1b.css" as="style"><link rel="preload" href="/assets/js/app.411e2f50.js" as="script"><link rel="preload" href="/assets/js/2.d15a153a.js" as="script"><link rel="preload" href="/assets/js/23.f79821a5.js" as="script"><link rel="prefetch" href="/assets/js/10.2f153828.js"><link rel="prefetch" href="/assets/js/100.b667e177.js"><link rel="prefetch" href="/assets/js/101.c209fa44.js"><link rel="prefetch" href="/assets/js/102.13086dde.js"><link rel="prefetch" href="/assets/js/103.0a28caf3.js"><link rel="prefetch" href="/assets/js/104.f3b26982.js"><link rel="prefetch" href="/assets/js/105.bed2aa67.js"><link rel="prefetch" href="/assets/js/106.074fb0a6.js"><link rel="prefetch" href="/assets/js/107.15a8e174.js"><link rel="prefetch" href="/assets/js/108.35e18c84.js"><link rel="prefetch" href="/assets/js/109.e2a264c3.js"><link rel="prefetch" href="/assets/js/11.6431df35.js"><link rel="prefetch" href="/assets/js/110.725b4b08.js"><link rel="prefetch" href="/assets/js/111.3b483713.js"><link rel="prefetch" href="/assets/js/112.7e15730a.js"><link rel="prefetch" href="/assets/js/113.276716fa.js"><link rel="prefetch" href="/assets/js/114.65dd3084.js"><link rel="prefetch" href="/assets/js/115.53b80343.js"><link rel="prefetch" href="/assets/js/116.6078b467.js"><link rel="prefetch" href="/assets/js/117.c836ecb7.js"><link rel="prefetch" href="/assets/js/118.b60c8f03.js"><link rel="prefetch" href="/assets/js/119.efe15b30.js"><link rel="prefetch" href="/assets/js/12.63a46fc8.js"><link rel="prefetch" href="/assets/js/120.94f31df6.js"><link rel="prefetch" href="/assets/js/121.a568fcd0.js"><link rel="prefetch" href="/assets/js/122.0008d7fc.js"><link rel="prefetch" href="/assets/js/123.6ec346bb.js"><link rel="prefetch" href="/assets/js/124.72b9a344.js"><link rel="prefetch" href="/assets/js/125.e107bce0.js"><link rel="prefetch" href="/assets/js/126.a1e69bca.js"><link rel="prefetch" href="/assets/js/127.fb8cf7d0.js"><link rel="prefetch" href="/assets/js/128.f8cd926e.js"><link rel="prefetch" href="/assets/js/129.26eabbc9.js"><link rel="prefetch" href="/assets/js/13.cc0c11c7.js"><link rel="prefetch" href="/assets/js/14.345efeb9.js"><link rel="prefetch" href="/assets/js/15.73ba45cc.js"><link rel="prefetch" href="/assets/js/16.3b42713d.js"><link rel="prefetch" href="/assets/js/17.91e64b3f.js"><link rel="prefetch" href="/assets/js/18.b48dd526.js"><link rel="prefetch" href="/assets/js/19.331a1d5b.js"><link rel="prefetch" href="/assets/js/20.fe2732c2.js"><link rel="prefetch" href="/assets/js/21.2e773881.js"><link rel="prefetch" href="/assets/js/22.11522b33.js"><link rel="prefetch" href="/assets/js/24.eccaef4d.js"><link rel="prefetch" href="/assets/js/25.2a8ed798.js"><link rel="prefetch" href="/assets/js/26.b4ba4907.js"><link rel="prefetch" href="/assets/js/27.d5c23226.js"><link rel="prefetch" href="/assets/js/28.cf3bc885.js"><link rel="prefetch" href="/assets/js/29.cd1cc505.js"><link rel="prefetch" href="/assets/js/3.647b1b61.js"><link rel="prefetch" href="/assets/js/30.3c596f51.js"><link rel="prefetch" href="/assets/js/31.899af202.js"><link rel="prefetch" href="/assets/js/32.db949734.js"><link rel="prefetch" href="/assets/js/33.51a563d4.js"><link rel="prefetch" href="/assets/js/34.9ef02876.js"><link rel="prefetch" href="/assets/js/35.5948aa50.js"><link rel="prefetch" href="/assets/js/36.ce53d0eb.js"><link rel="prefetch" href="/assets/js/37.5219c5a3.js"><link rel="prefetch" href="/assets/js/38.a1f6b02f.js"><link rel="prefetch" href="/assets/js/39.bb33cf81.js"><link rel="prefetch" href="/assets/js/4.5398eea6.js"><link rel="prefetch" href="/assets/js/40.5ef29717.js"><link rel="prefetch" href="/assets/js/41.d6099bc1.js"><link rel="prefetch" href="/assets/js/42.231e5535.js"><link rel="prefetch" href="/assets/js/43.e7868290.js"><link rel="prefetch" href="/assets/js/44.759855ed.js"><link rel="prefetch" href="/assets/js/45.7c483d63.js"><link rel="prefetch" href="/assets/js/46.653406b4.js"><link rel="prefetch" href="/assets/js/47.58ee1408.js"><link rel="prefetch" href="/assets/js/48.2a66ce14.js"><link rel="prefetch" href="/assets/js/49.22897d80.js"><link rel="prefetch" href="/assets/js/5.82e4a2bf.js"><link rel="prefetch" href="/assets/js/50.cdcc4e10.js"><link rel="prefetch" href="/assets/js/51.6962c462.js"><link rel="prefetch" href="/assets/js/52.207a26ae.js"><link rel="prefetch" href="/assets/js/53.f2c187b4.js"><link rel="prefetch" href="/assets/js/54.7a9bfc9d.js"><link rel="prefetch" href="/assets/js/55.d4cbc3fe.js"><link rel="prefetch" href="/assets/js/56.0260dd53.js"><link rel="prefetch" href="/assets/js/57.520d21ce.js"><link rel="prefetch" href="/assets/js/58.feb2dea6.js"><link rel="prefetch" href="/assets/js/59.2b927ec7.js"><link rel="prefetch" href="/assets/js/6.68ef8ab0.js"><link rel="prefetch" href="/assets/js/60.f19aae39.js"><link rel="prefetch" href="/assets/js/61.c643fe72.js"><link rel="prefetch" href="/assets/js/62.574daa7f.js"><link rel="prefetch" href="/assets/js/63.25020364.js"><link rel="prefetch" href="/assets/js/64.913ff2a3.js"><link rel="prefetch" href="/assets/js/65.99cd26fd.js"><link rel="prefetch" href="/assets/js/66.35bf69ff.js"><link rel="prefetch" href="/assets/js/67.d60b4c1f.js"><link rel="prefetch" href="/assets/js/68.1e1b838a.js"><link rel="prefetch" href="/assets/js/69.3de5d8fe.js"><link rel="prefetch" href="/assets/js/7.e689bbff.js"><link rel="prefetch" href="/assets/js/70.a179c64f.js"><link rel="prefetch" href="/assets/js/71.f87fbe2e.js"><link rel="prefetch" href="/assets/js/72.d11c452c.js"><link rel="prefetch" href="/assets/js/73.495412f7.js"><link rel="prefetch" href="/assets/js/74.b882a0f9.js"><link rel="prefetch" href="/assets/js/75.947d7dd7.js"><link rel="prefetch" href="/assets/js/76.aa0bd823.js"><link rel="prefetch" href="/assets/js/77.ec13ac36.js"><link rel="prefetch" href="/assets/js/78.5f079ac8.js"><link rel="prefetch" href="/assets/js/79.805e0817.js"><link rel="prefetch" href="/assets/js/8.e2026271.js"><link rel="prefetch" href="/assets/js/80.6f1eb864.js"><link rel="prefetch" href="/assets/js/81.e84acdc3.js"><link rel="prefetch" href="/assets/js/82.c52cfe10.js"><link rel="prefetch" href="/assets/js/83.4bdb512f.js"><link rel="prefetch" href="/assets/js/84.6ed53bd7.js"><link rel="prefetch" href="/assets/js/85.80bd61c3.js"><link rel="prefetch" href="/assets/js/86.1471b2e4.js"><link rel="prefetch" href="/assets/js/87.2de6a599.js"><link rel="prefetch" href="/assets/js/88.20a93de5.js"><link rel="prefetch" href="/assets/js/89.32ccdeec.js"><link rel="prefetch" href="/assets/js/9.bfd3b382.js"><link rel="prefetch" href="/assets/js/90.1bcb8125.js"><link rel="prefetch" href="/assets/js/91.75063773.js"><link rel="prefetch" href="/assets/js/92.d527a6ca.js"><link rel="prefetch" href="/assets/js/93.412b7554.js"><link rel="prefetch" href="/assets/js/94.29fd8b41.js"><link rel="prefetch" href="/assets/js/95.6f646eb2.js"><link rel="prefetch" href="/assets/js/96.4736f139.js"><link rel="prefetch" href="/assets/js/97.41a1de8b.js"><link rel="prefetch" href="/assets/js/98.6d8fdaa3.js"><link rel="prefetch" href="/assets/js/99.9af69f2d.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.c845bb1b.css">
+  </head>
+  <body class="theme-mode-light">
+    <div id="app" data-server-rendered="true"><div class="theme-container sidebar-open have-rightmenu"><header class="navbar blur"><div title="目录" class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/img/EB-logo.png" alt="Try's Note" class="logo"> <span class="site-name can-hide">Try's Note</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">首页</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Linux" class="dropdown-title"><a href="/pages/86d023/" class="link-title">Linux</a> <span class="title" style="display:none;">Linux</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/86d023/" class="nav-link">Linux基础</a></li><li class="dropdown-item"><!----> <a href="/pages/8fa15c/" class="nav-link">ArchLinux</a></li><li class="dropdown-item"><!----> <a href="/pages/55775e/" class="nav-link">CentOS</a></li><li class="dropdown-item"><!----> <a href="/pages/d1ff18/" class="nav-link">Unix环境高级编程</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="后端" class="dropdown-title"><!----> <span class="title" style="display:;">后端</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>Java</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/pages/a39288/" class="nav-link">SpringBoot</a></li></ul></li><li class="dropdown-item"><h4>Python</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/pages/da2d83/" class="nav-link">基础</a></li></ul></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar" style="display:none;"><!----> <nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">首页</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Linux" class="dropdown-title"><a href="/pages/86d023/" class="link-title">Linux</a> <span class="title" style="display:none;">Linux</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/pages/86d023/" class="nav-link">Linux基础</a></li><li class="dropdown-item"><!----> <a href="/pages/8fa15c/" class="nav-link">ArchLinux</a></li><li class="dropdown-item"><!----> <a href="/pages/55775e/" class="nav-link">CentOS</a></li><li class="dropdown-item"><!----> <a href="/pages/d1ff18/" class="nav-link">Unix环境高级编程</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="后端" class="dropdown-title"><!----> <span class="title" style="display:;">后端</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>Java</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/pages/a39288/" class="nav-link">SpringBoot</a></li></ul></li><li class="dropdown-item"><h4>Python</h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/pages/da2d83/" class="nav-link">基础</a></li></ul></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Linux基础</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>ArchLinux</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>CentOS</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/pages/55775e/" class="sidebar-link">虚拟机安装CentOS７ping不同的原因及解决方法</a></li><li><a href="/pages/c59bfb/" class="sidebar-link">CentOS7安装配置MySQL(MariaDB)及常用命令</a></li><li><a href="/pages/14f843/" aria-current="page" class="active sidebar-link">CentOS8编译配置nginx和rtmp</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/pages/14f843/#一-环境" class="sidebar-link">一.环境</a></li><li class="sidebar-sub-header"><a href="/pages/14f843/#二-准备编译环境" class="sidebar-link">二.准备编译环境</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/pages/14f843/#_1-安装依赖" class="sidebar-link">1.安装依赖</a></li><li class="sidebar-sub-header"><a href="/pages/14f843/#_2-下载nginx-1-18-0和rtmp模块" class="sidebar-link">2. 下载nginx-1.18.0和rtmp模块</a></li></ul></li><li class="sidebar-sub-header"><a href="/pages/14f843/#三-编译安装" class="sidebar-link">三.编译安装</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/pages/14f843/#_1-配置" class="sidebar-link">1.配置</a></li><li class="sidebar-sub-header"><a href="/pages/14f843/#_2-编译" class="sidebar-link">2.编译</a></li><li class="sidebar-sub-header"><a href="/pages/14f843/#_3-安装" class="sidebar-link">3.安装</a></li><li class="sidebar-sub-header"><a href="/pages/14f843/#_4-查看安装结果" class="sidebar-link">4.查看安装结果</a></li></ul></li><li class="sidebar-sub-header"><a href="/pages/14f843/#四-配置nginx" class="sidebar-link">四.配置nginx</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/pages/14f843/#_1-设置nginx开机启动" class="sidebar-link">1.设置nginx开机启动</a></li><li class="sidebar-sub-header"><a href="/pages/14f843/#_2-修改配置文件" class="sidebar-link">2.修改配置文件</a></li><li class="sidebar-sub-header"><a href="/pages/14f843/#_3-重启nginx-开启防火墙端口" class="sidebar-link">3.重启nginx，开启防火墙端口</a></li><li class="sidebar-sub-header"><a href="/pages/14f843/#_4-测试" class="sidebar-link">4.测试</a></li></ul></li></ul></li><li><a href="/pages/f6f781/" class="sidebar-link">Docker基本命令</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Unix环境高级编程</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <div><main class="page"><div class="theme-vdoing-wrapper "><div class="articleInfo-wrap" data-v-1cd794fe><div class="articleInfo" data-v-1cd794fe><ul class="breadcrumbs" data-v-1cd794fe><li data-v-1cd794fe><a href="/" title="首页" class="iconfont icon-home router-link-active" data-v-1cd794fe></a></li> <li data-v-1cd794fe><a href="/categories/?category=Linux" title="分类" data-v-1cd794fe>Linux</a></li> <li data-v-1cd794fe><a href="/categories/?category=CentOS" title="分类" data-v-1cd794fe>CentOS</a></li> <!----></ul> <div class="info" data-v-1cd794fe><div title="作者" class="author iconfont icon-touxiang" data-v-1cd794fe><a href="https://github.com/xugaoyi" target="_blank" title="作者" class="beLink" data-v-1cd794fe>Try</a></div> <div title="创建时间" class="date iconfont icon-riqi" data-v-1cd794fe><a href="javascript:;" data-v-1cd794fe>2020-08-18</a></div> <!----></div></div></div> <!----> <div class="content-wrapper"><div class="right-menu-wrapper"><div class="right-menu-margin"><div class="right-menu-content"></div></div></div> <h1><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAABKFJREFUSA3tVl1oFVcQnrMbrak3QUgkya1akpJYcrUtIqW1JvFBE9LiQ5v6JmJpolbMg32rVrhgoYK0QiMY6i9Y6EMaW5D+xFJaTYItIuK2Kr3+BJNwkxBj05sQY3b3nM6cs2dv9t7NT/vQJw/sndk5M/PNzJkzewGerP+pAmy+ON8lLzUJgA8ZYxYIYZmGYRnctDaWvJJAmTtfP1pvXsBCCPP8QFcCaRkZYACgDZFO4stNIcBCajEOlmmC9XpJ9bAGCaPaPmzPl32dvLSVu3BWCTQs0XQQ6g0DYgwLIoAZbBCdW/i+781o1VVlm/410mw4h06Y7bIPHNyWDyL4FHkX03Q8SrzNhZTZriieckWt7cL6MM85YcLpsi/7O9/iXFT6MswI0DmmpkSaJ0qLxFIm3+i1THHB3zmBH3PYx9CcykcLOeQVVa7QtdxTgQgEleX2AjHYfwA+2ddV77ruGoJUbhGDI09YSNXyMpUt5ylOzxgbUmtOp7NmbNt8v3arjTBfYELmLUV+M+nSawNNAUqpT3ClJWg5I3BLT+cGW/DXNGCa6tx1aakCGEigArTn4TDIPdrXXYKCZNrHLMCOEPvHBlLQ99s9eHB7EB6NTki73CVPQ2F5MSx/uRQixfmq7rK0wYD8w8E905bnPDfwoWs/rfv93NWN/ZfvwsLIU7A09gxECyISeGJkHAau98L97tuw7NXnoPyNF8FcYGLGKsOs0mN3OEyec9esGW/ZEl945dTP34wlR2FZVQWU1q0Cw8Tr7p+hgLLNL0FPxx/Q35mA8aEUrH6nCgwEl0tn7wUiZYJnNRh6DK4UH/k0lfyrsBKdPVv/AriGIQcEDQZ65LBAGe2Rzui9Ybjz7XUppz1/uKBbyVPGkN3ZAeC6hr0x7Nr38N5+EqkoOm17xpoqR9ohQF55ERSvr4Dkr3chNfC3DMzGJlNBElW8w9nsGQvhNGIzDkXzCg8cLK951xHsFBlTJspJNi3ZFIMF2AeDV3q8DNOB+YHi6QTrChDIWDBRi5U5f+ZMfJLu3ccrqxtdxk4SKH336LFxSmkqefwU5T8fhdSdQf9IVKD6aNiwI/hnmcAZ91isYMJIaCUCx9W098+LgruikeTqzqqxKPUwqJyCPJiyemVVZBOijDGjD38Os0jOiSPL1z3SPjXNANbiNPXAdzTfukjjuknNBbyz3nwgTd3AVFqUJ5hpHlq9MveLnWwttUfoygBmvVjuikxND3znrhsELnZk7k+OjIGxeNEkomyLVta0xxn+HZhjBc4YZ/AFjHjz9u3xRZl2BN4aq9nFwWh16IrQ1aHHEd3j1+4/dB9OtH4e29A2H1DyHQRmOSfQZ1Fy7MHBTGB6J/Djq6p3OxyO2cB+4Car7v/o3GXgfAkj23+x9ID1Teoamo/SXcbvSf2PX7Vc8DdCmE1vN9di+32P9/5YR3vLnhCVGUWBjEkr3yh4H8v9CzmsbdhzOKzsJKM90iFdaTMjRPhGVsakRvOaRidljo6H6G7j+ctrJpsP+4COhDIl0La2+FS4+5mlocBaXY5QnGZysIBYoeSsl5qQzrSj/cgNrfuEzlWBfwA+EjrZyWUvpAAAAABJRU5ErkJggg==">
+          CentOS8编译配置nginx和rtmp
+        </h1> <!----> <div class="theme-vdoing-content content__default"><h2 id="一-环境"><a href="#一-环境" class="header-anchor">#</a> 一.环境</h2> <p>服务器操作系统：CentOS Linux release 8.2.2004 (Core)
+nginx 版本: https://nginx.org/download/nginx-1.18.0.tar.gz
+RMTP模块：https://github.com/arut/nginx-rtmp-module</p> <p>测试主机:ArchLinux
+推流工具:OBS-Studio
+拉流工具:VLC</p> <h2 id="二-准备编译环境"><a href="#二-准备编译环境" class="header-anchor">#</a> 二.准备编译环境</h2> <h3 id="_1-安装依赖"><a href="#_1-安装依赖" class="header-anchor">#</a> 1.安装依赖</h3> <p>也可以直接跳过，在下面配置和编译的时候提示缺什么再安装什么</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">sudo</span> dnf <span class="token function">install</span> gcc <span class="token function">make</span> pcre pcre-devel openssl openssl-devel
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><h3 id="_2-下载nginx-1-18-0和rtmp模块"><a href="#_2-下载nginx-1-18-0和rtmp模块" class="header-anchor">#</a> 2. 下载nginx-1.18.0和rtmp模块</h3> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token comment">#####个人习惯，弄个临时文件夹存放#####</span>
+<span class="token function">mkdir</span> tmp
+<span class="token builtin class-name">cd</span> tmp
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">wget</span> https://nginx.org/download/nginx-1.18.0.tar.gz
+<span class="token function">tar</span> -zxvf nginx-1.18.0.tar.gz 
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">git</span> clone https://github.com/arut/nginx-rtmp-module        
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><h2 id="三-编译安装"><a href="#三-编译安装" class="header-anchor">#</a> 三.编译安装</h2> <h3 id="_1-配置"><a href="#_1-配置" class="header-anchor">#</a> 1.配置</h3> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token comment">###注意nginx源码文件夹和rtmp模块源码文件夹在同一目录下#########</span>
+./configure --prefix<span class="token operator">=</span>/usr/local/nginx  --add-module<span class="token operator">=</span><span class="token punctuation">..</span>/nginx-rtmp-module  --with-http_ssl_module
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><h3 id="_2-编译"><a href="#_2-编译" class="header-anchor">#</a> 2.编译</h3> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">make</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>执行make过程中会报如下错</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code>	-o objs/addon/nginx-rtmp-module/ngx_rtmp_eval.o <span class="token punctuation">\</span>
+	<span class="token punctuation">..</span>/nginx-rtmp-module/ngx_rtmp_eval.c
+<span class="token punctuation">..</span>/nginx-rtmp-module/ngx_rtmp_eval.c: 在函数‘ngx_rtmp_eval’中:
+<span class="token punctuation">..</span>/nginx-rtmp-module/ngx_rtmp_eval.c:160:17: 错误：this statement may fall through <span class="token punctuation">[</span>-Werror<span class="token operator">=</span>implicit-fallthrough<span class="token operator">=</span><span class="token punctuation">]</span>
+                 switch <span class="token punctuation">(</span>c<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                 ^~~~~~
+<span class="token punctuation">..</span>/nginx-rtmp-module/ngx_rtmp_eval.c:170:13: 附注：here
+             <span class="token keyword">case</span> ESCAPE:
+             ^~~~
+cc1：所有的警告都被当作是错误
+make<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>: *** <span class="token punctuation">[</span>objs/Makefile:1349：objs/addon/nginx-rtmp-module/ngx_rtmp_eval.o<span class="token punctuation">]</span> 错误 <span class="token number">1</span>
+make<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>: 离开目录“/home/centos/tmp/nginx-1.18.0”
+make: *** <span class="token punctuation">[</span>Makefile:8：build<span class="token punctuation">]</span> 错误 <span class="token number">2</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><p>原因是Makefile里有Werror选项，语法要求严格，将所有警告当作错误处理啦
+解决方法</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token comment">###位于nginx源码目录下#####</span>
+<span class="token function">nano</span> objs/Makefile
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>打开后内容如下</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code>
+CC <span class="token operator">=</span>    cc
+CFLAGS <span class="token operator">=</span>  -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror  -g 
+CPP <span class="token operator">=</span>   cc -E
+LINK <span class="token operator">=</span>  <span class="token variable"><span class="token variable">$(</span>CC<span class="token variable">)</span></span>
+
+
+ALL_INCS <span class="token operator">=</span> -I src/core <span class="token punctuation">\</span>
+        -I src/event <span class="token punctuation">\</span>
+        -I src/event/modules <span class="token punctuation">\</span>
+        -I src/os/unix <span class="token punctuation">\</span>
+        -I <span class="token punctuation">..</span>/nginx-rtmp-module <span class="token punctuation">\</span>
+        -I objs <span class="token punctuation">\</span>
+        -I src/http <span class="token punctuation">\</span>
+        -I src/http/modules
+<span class="token comment">##################################</span>
+<span class="token comment">#######后面内容生略################</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br></div></div><p>将-Werror删除</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code>CFLAGS <span class="token operator">=</span>  -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter   -g 
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>ctrl+x，然后输入y保存退出 后再执行make</p> <h3 id="_3-安装"><a href="#_3-安装" class="header-anchor">#</a> 3.安装</h3> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">sudo</span> <span class="token function">make</span> <span class="token function">install</span> 
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><h3 id="_4-查看安装结果"><a href="#_4-查看安装结果" class="header-anchor">#</a> 4.查看安装结果</h3> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code> /usr/local/nginx/sbin/nginx -v
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>输出版本号为
+nginx version: nginx/1.18.0
+安装成功</p> <h2 id="四-配置nginx"><a href="#四-配置nginx" class="header-anchor">#</a> 四.配置nginx</h2> <h3 id="_1-设置nginx开机启动"><a href="#_1-设置nginx开机启动" class="header-anchor">#</a> 1.设置nginx开机启动</h3> <p>(1)创建nginx服务文件</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">sudo</span> <span class="token function">nano</span> /usr/lib/systemd/system/nginx.service 
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>创建nginx服务文件,输入以下内容</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token punctuation">[</span>Unit<span class="token punctuation">]</span>
+<span class="token assign-left variable">Description</span><span class="token operator">=</span>nginx - high performance web server
+<span class="token assign-left variable">After</span><span class="token operator">=</span>network.target remote-fs.target nss-lookup.target
+
+<span class="token punctuation">[</span>Service<span class="token punctuation">]</span>
+<span class="token assign-left variable">Type</span><span class="token operator">=</span>forking
+<span class="token assign-left variable">ExecStart</span><span class="token operator">=</span>/usr/local/nginx/sbin/nginx
+<span class="token assign-left variable">ExecReload</span><span class="token operator">=</span>/usr/local/nginx/sbin/nginx -s reload
+<span class="token assign-left variable">ExecStop</span><span class="token operator">=</span>/usr/local/nginx/sbin/nginx -s stop
+
+<span class="token punctuation">[</span>Install<span class="token punctuation">]</span>
+<span class="token assign-left variable">WantedBy</span><span class="token operator">=</span>multi-user.target
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br></div></div><p>(2)启用nginx服务</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">sudo</span> systemctl start nginx 
+<span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> nginx 
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><h3 id="_2-修改配置文件"><a href="#_2-修改配置文件" class="header-anchor">#</a> 2.修改配置文件</h3> <p>这是安装完nginx后的默认配置文件</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token comment">#user  nobody;</span>
+worker_processes  <span class="token number">1</span><span class="token punctuation">;</span>
+
+<span class="token comment">#error_log  logs/error.log;</span>
+<span class="token comment">#error_log  logs/error.log  notice;</span>
+<span class="token comment">#error_log  logs/error.log  info;</span>
+
+<span class="token comment">#pid        logs/nginx.pid;</span>
+
+
+events <span class="token punctuation">{</span>
+    worker_connections  <span class="token number">1024</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+
+http <span class="token punctuation">{</span>
+    include       mime.types<span class="token punctuation">;</span>
+    default_type  application/octet-stream<span class="token punctuation">;</span>
+
+    <span class="token comment">#log_format  main  '$remote_addr - $remote_user [$time_local] &quot;$request&quot; '</span>
+    <span class="token comment">#                  '$status $body_bytes_sent &quot;$http_referer&quot; '</span>
+    <span class="token comment">#                  '&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;';</span>
+
+    <span class="token comment">#access_log  logs/access.log  main;</span>
+
+    sendfile        on<span class="token punctuation">;</span>
+    <span class="token comment">#tcp_nopush     on;</span>
+
+    <span class="token comment">#keepalive_timeout  0;</span>
+    keepalive_timeout  <span class="token number">65</span><span class="token punctuation">;</span>
+
+    <span class="token comment">#gzip  on;</span>
+
+    server <span class="token punctuation">{</span>
+        listen       <span class="token number">80</span><span class="token punctuation">;</span>
+        server_name  localhost<span class="token punctuation">;</span>
+
+        <span class="token comment">#charset koi8-r;</span>
+
+        <span class="token comment">#access_log  logs/host.access.log  main;</span>
+
+        location / <span class="token punctuation">{</span>
+            root   html<span class="token punctuation">;</span>
+            index  index.html index.htm<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment">#error_page  404              /404.html;</span>
+
+        <span class="token comment"># redirect server error pages to the static page /50x.html</span>
+        <span class="token comment">#</span>
+        error_page   <span class="token number">500</span> <span class="token number">502</span> <span class="token number">503</span> <span class="token number">504</span>  /50x.html<span class="token punctuation">;</span>
+        location <span class="token operator">=</span> /50x.html <span class="token punctuation">{</span>
+            root   html<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment"># proxy the PHP scripts to Apache listening on 127.0.0.1:80</span>
+        <span class="token comment">#</span>
+        <span class="token comment">#location ~ \.php$ {</span>
+        <span class="token comment">#    proxy_pass   http://127.0.0.1;</span>
+        <span class="token comment">#}</span>
+
+        <span class="token comment"># pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000</span>
+        <span class="token comment">#</span>
+        <span class="token comment">#location ~ \.php$ {</span>
+        <span class="token comment">#    root           html;</span>
+        <span class="token comment">#    fastcgi_pass   127.0.0.1:9000;</span>
+        <span class="token comment">#    fastcgi_index  index.php;</span>
+        <span class="token comment">#    fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;</span>
+        <span class="token comment">#    include        fastcgi_params;</span>
+        <span class="token comment">#}</span>
+
+        <span class="token comment"># deny access to .htaccess files, if Apache's document root</span>
+        <span class="token comment"># concurs with nginx's one</span>
+        <span class="token comment">#</span>
+        <span class="token comment">#location ~ /\.ht {</span>
+        <span class="token comment">#    deny  all;</span>
+        <span class="token comment">#}</span>
+    <span class="token punctuation">}</span>
+
+
+    <span class="token comment"># another virtual host using mix of IP-, name-, and port-based configuration</span>
+    <span class="token comment">#</span>
+    <span class="token comment">#server {</span>
+    <span class="token comment">#    listen       8000;</span>
+    <span class="token comment">#    listen       somename:8080;</span>
+    <span class="token comment">#    server_name  somename  alias  another.alias;</span>
+
+    <span class="token comment">#    location / {</span>
+    <span class="token comment">#        root   html;</span>
+    <span class="token comment">#        index  index.html index.htm;</span>
+    <span class="token comment">#    }</span>
+    <span class="token comment">#}</span>
+
+
+    <span class="token comment"># HTTPS server</span>
+    <span class="token comment">#</span>
+    <span class="token comment">#server {</span>
+    <span class="token comment">#    listen       443 ssl;</span>
+    <span class="token comment">#    server_name  localhost;</span>
+
+    <span class="token comment">#    ssl_certificate      cert.pem;</span>
+    <span class="token comment">#    ssl_certificate_key  cert.key;</span>
+
+    <span class="token comment">#    ssl_session_cache    shared:SSL:1m;</span>
+    <span class="token comment">#    ssl_session_timeout  5m;</span>
+
+    <span class="token comment">#    ssl_ciphers  HIGH:!aNULL:!MD5;</span>
+    <span class="token comment">#    ssl_prefer_server_ciphers  on;</span>
+
+    <span class="token comment">#    location / {</span>
+    <span class="token comment">#        root   html;</span>
+    <span class="token comment">#        index  index.html index.htm;</span>
+    <span class="token comment">#    }</span>
+    <span class="token comment">#}</span>
+
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br><span class="line-number">71</span><br><span class="line-number">72</span><br><span class="line-number">73</span><br><span class="line-number">74</span><br><span class="line-number">75</span><br><span class="line-number">76</span><br><span class="line-number">77</span><br><span class="line-number">78</span><br><span class="line-number">79</span><br><span class="line-number">80</span><br><span class="line-number">81</span><br><span class="line-number">82</span><br><span class="line-number">83</span><br><span class="line-number">84</span><br><span class="line-number">85</span><br><span class="line-number">86</span><br><span class="line-number">87</span><br><span class="line-number">88</span><br><span class="line-number">89</span><br><span class="line-number">90</span><br><span class="line-number">91</span><br><span class="line-number">92</span><br><span class="line-number">93</span><br><span class="line-number">94</span><br><span class="line-number">95</span><br><span class="line-number">96</span><br><span class="line-number">97</span><br><span class="line-number">98</span><br><span class="line-number">99</span><br><span class="line-number">100</span><br><span class="line-number">101</span><br><span class="line-number">102</span><br><span class="line-number">103</span><br><span class="line-number">104</span><br><span class="line-number">105</span><br><span class="line-number">106</span><br><span class="line-number">107</span><br><span class="line-number">108</span><br><span class="line-number">109</span><br><span class="line-number">110</span><br><span class="line-number">111</span><br><span class="line-number">112</span><br><span class="line-number">113</span><br><span class="line-number">114</span><br><span class="line-number">115</span><br><span class="line-number">116</span><br></div></div><p>执行</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">sudo</span> <span class="token function">nano</span> /usr/local/nginx/conf/nginx.conf
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>修改配置文件
+在配置文件头部加入</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code>
+rtmp_auto_push on<span class="token punctuation">;</span>
+
+rtmp <span class="token punctuation">{</span>
+    server <span class="token punctuation">{</span>
+	listen <span class="token number">1935</span><span class="token punctuation">;</span>     
+          application live <span class="token punctuation">{</span>
+            live on<span class="token punctuation">;</span>
+            hls on<span class="token punctuation">;</span>
+            hls_fragment 3s<span class="token punctuation">;</span>
+            hls_playlist_length 10s<span class="token punctuation">;</span>
+            hls_path /usr/local/nginx/html/hls<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br></div></div><p>修改后配置文件内容如下</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code>rtmp_auto_push on<span class="token punctuation">;</span>
+
+rtmp <span class="token punctuation">{</span>
+    server <span class="token punctuation">{</span>
+        listen <span class="token number">1935</span><span class="token punctuation">;</span>
+
+          application live <span class="token punctuation">{</span>
+            live on<span class="token punctuation">;</span>
+            hls on<span class="token punctuation">;</span>
+            hls_fragment 3s<span class="token punctuation">;</span>
+            hls_playlist_length 10s<span class="token punctuation">;</span>
+            hls_path /usr/local/nginx/html/hls<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+
+
+
+
+<span class="token comment">#user  nobody;</span>
+worker_processes  <span class="token number">1</span><span class="token punctuation">;</span>
+
+<span class="token comment">#error_log  logs/error.log;</span>
+<span class="token comment">#error_log  logs/error.log  notice;</span>
+<span class="token comment">#error_log  logs/error.log  info;</span>
+
+<span class="token comment">#pid        logs/nginx.pid;</span>
+
+
+events <span class="token punctuation">{</span>
+    worker_connections  <span class="token number">1024</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+
+http <span class="token punctuation">{</span>
+    include       mime.types<span class="token punctuation">;</span>
+    default_type  application/octet-stream<span class="token punctuation">;</span>
+
+    <span class="token comment">#log_format  main  '$remote_addr - $remote_user [$time_local] &quot;$request&quot; '</span>
+    <span class="token comment">#                  '$status $body_bytes_sent &quot;$http_referer&quot; '</span>
+    <span class="token comment">#                  '&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;';</span>
+
+    <span class="token comment">#access_log  logs/access.log  main;</span>
+
+    sendfile        on<span class="token punctuation">;</span>
+    <span class="token comment">#tcp_nopush     on;</span>
+
+    <span class="token comment">#keepalive_timeout  0;</span>
+    keepalive_timeout  <span class="token number">65</span><span class="token punctuation">;</span>
+
+    <span class="token comment">#gzip  on;</span>
+
+    server <span class="token punctuation">{</span>
+        listen       <span class="token number">80</span><span class="token punctuation">;</span>
+        server_name  localhost<span class="token punctuation">;</span>
+
+        <span class="token comment">#charset koi8-r;</span>
+
+        <span class="token comment">#access_log  logs/host.access.log  main;</span>
+
+        location / <span class="token punctuation">{</span>
+            root   html<span class="token punctuation">;</span>
+            index  index.html index.htm<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment">#error_page  404              /404.html;</span>
+
+        <span class="token comment"># redirect server error pages to the static page /50x.html</span>
+        <span class="token comment">#</span>
+        error_page   <span class="token number">500</span> <span class="token number">502</span> <span class="token number">503</span> <span class="token number">504</span>  /50x.html<span class="token punctuation">;</span>
+        location <span class="token operator">=</span> /50x.html <span class="token punctuation">{</span>
+            root   html<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment"># proxy the PHP scripts to Apache listening on 127.0.0.1:80</span>
+        <span class="token comment">#</span>
+        <span class="token comment">#location ~ \.php$ {</span>
+        <span class="token comment">#    proxy_pass   http://127.0.0.1;</span>
+        <span class="token comment">#}</span>
+
+        <span class="token comment"># pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000</span>
+        <span class="token comment">#</span>
+        <span class="token comment">#location ~ \.php$ {</span>
+        <span class="token comment">#    root           html;</span>
+        <span class="token comment">#    fastcgi_pass   127.0.0.1:9000;</span>
+        <span class="token comment">#    fastcgi_index  index.php;</span>
+        <span class="token comment">#    fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;</span>
+        <span class="token comment">#    include        fastcgi_params;</span>
+        <span class="token comment">#}</span>
+
+        <span class="token comment"># deny access to .htaccess files, if Apache's document root</span>
+        <span class="token comment"># concurs with nginx's one</span>
+        <span class="token comment">#</span>
+        <span class="token comment">#location ~ /\.ht {</span>
+        <span class="token comment">#    deny  all;</span>
+        <span class="token comment">#}</span>
+    <span class="token punctuation">}</span>
+
+
+    <span class="token comment"># another virtual host using mix of IP-, name-, and port-based configuration</span>
+    <span class="token comment">#</span>
+    <span class="token comment">#server {</span>
+    <span class="token comment">#    listen       8000;</span>
+    <span class="token comment">#    listen       somename:8080;</span>
+    <span class="token comment">#    server_name  somename  alias  another.alias;</span>
+
+    <span class="token comment">#    location / {</span>
+    <span class="token comment">#        root   html;</span>
+    <span class="token comment">#        index  index.html index.htm;</span>
+    <span class="token comment">#    }</span>
+    <span class="token comment">#}</span>
+
+
+    <span class="token comment"># HTTPS server</span>
+    <span class="token comment">#</span>
+    <span class="token comment">#server {</span>
+    <span class="token comment">#    listen       443 ssl;</span>
+    <span class="token comment">#    server_name  localhost;</span>
+
+    <span class="token comment">#    ssl_certificate      cert.pem;</span>
+    <span class="token comment">#    ssl_certificate_key  cert.key;</span>
+
+    <span class="token comment">#    ssl_session_cache    shared:SSL:1m;</span>
+    <span class="token comment">#    ssl_session_timeout  5m;</span>
+
+    <span class="token comment">#    ssl_ciphers  HIGH:!aNULL:!MD5;</span>
+    <span class="token comment">#    ssl_prefer_server_ciphers  on;</span>
+
+    <span class="token comment">#    location / {</span>
+    <span class="token comment">#        root   html;</span>
+    <span class="token comment">#        index  index.html index.htm;</span>
+    <span class="token comment">#    }</span>
+    <span class="token comment">#}</span>
+
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br><span class="line-number">71</span><br><span class="line-number">72</span><br><span class="line-number">73</span><br><span class="line-number">74</span><br><span class="line-number">75</span><br><span class="line-number">76</span><br><span class="line-number">77</span><br><span class="line-number">78</span><br><span class="line-number">79</span><br><span class="line-number">80</span><br><span class="line-number">81</span><br><span class="line-number">82</span><br><span class="line-number">83</span><br><span class="line-number">84</span><br><span class="line-number">85</span><br><span class="line-number">86</span><br><span class="line-number">87</span><br><span class="line-number">88</span><br><span class="line-number">89</span><br><span class="line-number">90</span><br><span class="line-number">91</span><br><span class="line-number">92</span><br><span class="line-number">93</span><br><span class="line-number">94</span><br><span class="line-number">95</span><br><span class="line-number">96</span><br><span class="line-number">97</span><br><span class="line-number">98</span><br><span class="line-number">99</span><br><span class="line-number">100</span><br><span class="line-number">101</span><br><span class="line-number">102</span><br><span class="line-number">103</span><br><span class="line-number">104</span><br><span class="line-number">105</span><br><span class="line-number">106</span><br><span class="line-number">107</span><br><span class="line-number">108</span><br><span class="line-number">109</span><br><span class="line-number">110</span><br><span class="line-number">111</span><br><span class="line-number">112</span><br><span class="line-number">113</span><br><span class="line-number">114</span><br><span class="line-number">115</span><br><span class="line-number">116</span><br><span class="line-number">117</span><br><span class="line-number">118</span><br><span class="line-number">119</span><br><span class="line-number">120</span><br><span class="line-number">121</span><br><span class="line-number">122</span><br><span class="line-number">123</span><br><span class="line-number">124</span><br><span class="line-number">125</span><br><span class="line-number">126</span><br><span class="line-number">127</span><br><span class="line-number">128</span><br><span class="line-number">129</span><br><span class="line-number">130</span><br><span class="line-number">131</span><br><span class="line-number">132</span><br><span class="line-number">133</span><br><span class="line-number">134</span><br><span class="line-number">135</span><br><span class="line-number">136</span><br><span class="line-number">137</span><br><span class="line-number">138</span><br></div></div><h3 id="_3-重启nginx-开启防火墙端口"><a href="#_3-重启nginx-开启防火墙端口" class="header-anchor">#</a> 3.重启nginx，开启防火墙端口</h3> <p>(1)重启ngxin服务</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code> <span class="token function">sudo</span> systemctl restart nginx   
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>(2)开启1935端口</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token function">sudo</span> firewall-cmd --add-port<span class="token operator">=</span><span class="token number">1935</span>/tcp --permanent
+<span class="token function">sudo</span> firewall-cmd --reload 
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><h3 id="_4-测试"><a href="#_4-测试" class="header-anchor">#</a> 4.测试</h3> <p>(1)设置OBS-Studio的推流地址
+其中ip为我的CentOS虚拟机的ip地址，将ip改为自己的服务器地址，ip后面的端口号和live是在nginx配置文件里设置的，与配置文件对应
+<img src="https://img-blog.csdnimg.cn/20200818111237943.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3I4bDhxOA==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">
+设置好后在OBS-Studio里添加一个屏幕捕获，然后开始推流.</p> <p>(2)VLC拉流测试</p> <p>与nginx配置文件对应的rtmp流和hls流地址</p> <p>rtmp://192.168.1.116:1935/live/demo</p> <p>http://192.168.1.116/hls/demo.m3u8</p> <p><img src="https://img-blog.csdnimg.cn/20200818114413306.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3I4bDhxOA==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p></div></div> <!----> <div class="page-edit"><!----> <div class="tags"><a href="/tags/?tag=CentOS" title="标签">#CentOS</a><a href="/tags/?tag=nginx" title="标签">#nginx</a><a href="/tags/?tag=rtmp" title="标签">#rtmp</a></div> <div class="last-updated"><span class="prefix">上次更新:</span> <span class="time">2021/06/21, 10:26:34</span></div></div> <div class="page-nav-wapper"><div class="page-nav-centre-wrap"><a href="/pages/c59bfb/" class="page-nav-centre page-nav-centre-prev"><div class="tooltip">CentOS7安装配置MySQL(MariaDB)及常用命令</div></a> <a href="/pages/f6f781/" class="page-nav-centre page-nav-centre-next"><div class="tooltip">Docker基本命令</div></a></div> <div class="page-nav"><p class="inner"><span class="prev">
+        ←
+        <a href="/pages/c59bfb/" class="prev">CentOS7安装配置MySQL(MariaDB)及常用命令</a></span> <span class="next"><a href="/pages/f6f781/">Docker基本命令</a>→
+      </span></p></div></div></div> <div class="article-list"><div class="article-title"><a href="/archives/" class="iconfont icon-bi">最近更新</a></div> <div class="article-wrapper"><dl><dd>01</dd> <dt><a href="/pages/8e4a59/"><div>Git命令思维导图</div></a> <span>11-18</span></dt></dl><dl><dd>02</dd> <dt><a href="/pages/773986/"><div>常用Git命令清单</div></a> <span>11-18</span></dt></dl><dl><dd>03</dd> <dt><a href="/pages/af8d0d/"><div>Git变基合并</div></a> <span>11-18</span></dt></dl> <dl><dd></dd> <dt><a href="/archives/" class="more">更多文章&gt;</a></dt></dl></div></div></main></div> <div class="footer"><!----> 
+    Copyright © 2017-2021
+    <span>Try</span></div> <div class="buttons"><div title="返回顶部" class="button blur go-to-top iconfont icon-fanhuidingbu" style="display:none;"></div> <div title="去评论" class="button blur go-to-comment iconfont icon-pinglun" style="display:none;"></div> <div title="主题模式" class="button blur theme-mode-but iconfont icon-zhuti"><ul class="select-box" style="display:none;"><li class="iconfont icon-zidong">
+          跟随系统
+        </li><li class="iconfont icon-rijianmoshi">
+          浅色模式
+        </li><li class="iconfont icon-yejianmoshi">
+          深色模式
+        </li><li class="iconfont icon-yuedu">
+          阅读模式
+        </li></ul></div></div> <!----> <!----> <!----></div><div class="global-ui"><div></div></div></div>
+    <script src="/assets/js/app.411e2f50.js" defer></script><script src="/assets/js/2.d15a153a.js" defer></script><script src="/assets/js/23.f79821a5.js" defer></script>
+  </body>
+</html>
